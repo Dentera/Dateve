@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+import ast
 
 bot = telebot.TeleBot('5205782024:AAGWRPiTpr-daEaeUYMNiVXFmdtPYtz98K8')
 event = []
@@ -21,6 +22,8 @@ zumber = 0
 idc = 0
 sending = ''
 
+data_events = ''
+
 @bot.message_handler(commands = ['start'])
 
 def start_message(message):    
@@ -35,7 +38,7 @@ def start_message(message):
     
 @bot.message_handler(content_types = ['text'])
 
-def work(message):    
+def work(message):
     global total
     global dot
     global admin
@@ -43,6 +46,17 @@ def work(message):
     global number
     global zumber
     global idc
+    
+    data = open("D:\\Dateve\\Events.txt") 
+    data_events = data.read()
+    event = ast.literal_eval(data_events)
+    data.close()
+    total = len(event)
+    data = open("D:\\Dateve\\Chat.txt") 
+    data_events = data.read()
+    chat = ast.literal_eval(data_events)
+    data.close()
+    
     number = 0
     stop_ham = 0
     for number in range (len(ID)):
@@ -101,6 +115,14 @@ def work(message):
                         event[total] = event[total] + ' ' + (message.from_user.username)
                         total += 1
                         chat.append(message.chat.id)
+                        data = open("D:\\Dateve\\Events.txt", 'w')
+                        data_events = str(event)
+                        data.write(data_events)
+                        data.close()
+                        data = open("D:\\Dateve\\Chat.txt", 'w')
+                        data_events = str(chat)
+                        data.write(data_events)
+                        data.close()
                     else:
                         bot.send_message(message.chat.id, 'Некорректная дата')
                         text = ' '
@@ -110,6 +132,14 @@ def work(message):
                         event[total] = event[total] + ' ' + (message.from_user.username)
                         total += 1
                         chat.append(message.chat.id)
+                        data = open("D:\\Dateve\\Events.txt", 'w')
+                        data_events = str(event)
+                        data.write(data_events)
+                        data.close()
+                        data = open("D:\\Dateve\\Chat.txt", 'w')
+                        data_events = str(chat)
+                        data.write(data_events)
+                        data.close()
                     else:
                         bot.send_message(message.chat.id, 'Некорректная дата')
                         text = ' '
@@ -119,6 +149,14 @@ def work(message):
                         event[total] = event[total] + ' ' + (message.from_user.username)
                         total += 1
                         chat.append(message.chat.id)
+                        data = open("D:\\Dateve\\Events.txt", 'w')
+                        data_events = str(event)
+                        data.write(data_events)
+                        data.close()
+                        data = open("D:\\Dateve\\Chat.txt", 'w')
+                        data_events = str(chat)
+                        data.write(data_events)
+                        data.close()
                     else:
                         bot.send_message(message.chat.id, 'Некорректная дата')
                         text = ' '
@@ -302,17 +340,7 @@ def work(message):
 ##------------------------------Обновление------------------------------
     
     elif (text == 'Обновление' or text == 'обновление'):
-        bot.send_message(message.chat.id,'Добавлены кнопки для удобства пользователя.')
-        bot.send_message(message.chat.id,'Добавлен разбан.')
-        bot.send_message(message.chat.id,'Бан и разбан стали доступны только админу.')
-        bot.send_message(message.chat.id,'Теперь админка активируется не только в чате админа.')
-        bot.send_message(message.chat.id,'Многие команды теперь можно писать с маленькой буквы.')
-        bot.send_message(message.chat.id,'Бан работает теперь на определённого пользователя, а не на чат.')
-        bot.send_message(message.chat.id,'События за определённую дату теперь показываются только в чате, где были созданы.')
-        bot.send_message(message.chat.id,'Новые возможности у админа.')
-        bot.send_message(message.chat.id,'Введена причина бана.')
-        bot.send_message(message.chat.id,'Введена логистика дат, кроме висакосных годов.')
-        bot.send_message(message.chat.id,'Дата обновления - 03.04.2022.')
+        bot.send_message(message.chat.id,'Последняя дата обновления - 03.04.2022.')
         
 ##------------------------------Помощь------------------------------
     
