@@ -1,20 +1,26 @@
-import telebot
-import datetime
-import sqlite3
-from code_separation.UI import *
-from code_separation.Datachecker import data_check
+import telebot  # Подключение библиотеки pyTelegramBotAPI.
+import datetime  # Подключение библиотеки DateTime.
+import sqlite3  # Подключение библиотеки SQLite3.
+from code_separation.UI import *  # Подключение всех модулей из файла UI, который в папке code_separation.
+from code_separation.Datachecker import data_check \
+    # Подключение функции data_check из файла, который в папке code_separation.
 
-bot = telebot.TeleBot("5205782024:AAGWRPiTpr-daEaeUYMNiVXFmdtPYtz98K8")
+bot = telebot.TeleBot("")  \
+    # Подключение токена телеграм-бота для работы самим ботом.
 
-adding_year = adding_month = adding_day = adding_event = False
+adding_year = adding_month = adding_day = adding_event = False \
+    # Создание переменных типа bool, для ввода даты.
+adding_event_year = adding_event_month = adding_event_day = int() \
+    # Создание переменных типа integer, для сохранения числовых значений года/месяца/дня.
 
-db = sqlite3.connect('database/Data.db', check_same_thread=False)
-cursor = db.cursor()
+db = sqlite3.connect('database/Data.db', check_same_thread=False)  \
+    # Создание переменной db, содержащей в себе ссылку на базу данных Data с включённой многопоточностью.
+cursor = db.cursor()  # Создание переменной cursor для работы с базой данных.
 
 
-def db_add(chatID, event_day, event):
+def db_add(chat_id, event_day, event):
     cursor.execute(""" INSERT INTO events(chatID, event_day, event)
-    VALUES(?, ?, ?)""", (chatID, event_day, event))
+    VALUES(?, ?, ?)""", (chat_id, event_day, event))
 
 
 @bot.message_handler(commands=['start'])
