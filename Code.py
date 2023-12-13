@@ -5,7 +5,7 @@ from code_separation.UI import *  # Подключение всех модуле
 from code_separation.Datachecker import data_check \
     # Подключение функции data_check из файла, который в папке code_separation.
 
-bot = telebot.TeleBot("")  \
+bot = telebot.TeleBot("5205782024:AAHX0lbe_qQttERiBl3Wx4otcSnqCQMHW4k")  \
     # Подключение токена телеграм-бота для работы самим ботом.
 
 adding_year = adding_month = adding_day = adding_event = False \
@@ -82,6 +82,16 @@ def callback(call):
         bot.delete_message(call.message.chat.id, call.message.message_id)
         bot.send_message(call.message.chat.id, "Теперь напишите событие")
         adding_event = True
+    if call.data == "output":
+        bot.delete_message(call.message.chat.id, call.message.message_id)
+        out = cursor.execute("""SELECT event,event_day FROM events WHERE chatID = (?)""", (call.message.chat.id,)).fetchall()
+        if len(out) > 0:
+            bot.send_message(call.message.chat.id, "Вывод событий:", reply_markup=keyboard_call)
+            for i in range(len(out)):
+                send = ' '.join(out[i])
+                bot.send_message(call.message.chat.id, send)
+        else:
+            bot.send_message(call.message.chat.id, "Сохранённых событий в этом чате нет", reply_markup=keyboard_call)
 
 
 if __name__ == '__main__':

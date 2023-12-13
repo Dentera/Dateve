@@ -4,6 +4,7 @@ command_button = types.InlineKeyboardButton('Команды', callback_data='com
 add_button = types.InlineKeyboardButton('Добавить событие', callback_data='add_event')
 main_button = types.InlineKeyboardButton('Dateve', callback_data='main')
 event_button = types.InlineKeyboardButton('Записать событие', callback_data='event')
+output_button = types.InlineKeyboardButton('Вывести события', callback_data='output')
 
 keyboard_main = types.InlineKeyboardMarkup(row_width=2)
 keyboard_call = types.InlineKeyboardMarkup(row_width=2)
@@ -24,7 +25,7 @@ for day in range(1, 30, 3):
     if day == 28:
         keyboard_days.add(types.InlineKeyboardButton(31, callback_data=31))
 
-keyboard_main.add(add_button, command_button)
+keyboard_main.add(add_button, output_button, command_button)
 keyboard_call.add(main_button)
 keyboard_start.add(command_button)
 keyboard_add_event.add(event_button)
