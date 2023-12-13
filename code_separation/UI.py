@@ -3,12 +3,14 @@ from telebot import types
 command_button = types.InlineKeyboardButton('Команды', callback_data='commands')
 add_button = types.InlineKeyboardButton('Добавить событие', callback_data='add_event')
 main_button = types.InlineKeyboardButton('Dateve', callback_data='main')
+event_button = types.InlineKeyboardButton('Записать событие', callback_data='event')
 
 keyboard_main = types.InlineKeyboardMarkup(row_width=2)
 keyboard_call = types.InlineKeyboardMarkup(row_width=2)
 keyboard_start = types.InlineKeyboardMarkup(row_width=2)
 keyboard_days = types.InlineKeyboardMarkup(row_width=3)
 keyboard_months = types.InlineKeyboardMarkup(row_width=3)
+keyboard_add_event = types.InlineKeyboardMarkup(row_width=1)
 
 for month in range(1, 12, 3):
     keyboard_months.add(types.InlineKeyboardButton(month, callback_data=month),
@@ -25,3 +27,4 @@ for day in range(1, 30, 3):
 keyboard_main.add(add_button, command_button)
 keyboard_call.add(main_button)
 keyboard_start.add(command_button)
+keyboard_add_event.add(event_button)
